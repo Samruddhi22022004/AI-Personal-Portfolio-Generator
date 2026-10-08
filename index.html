@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>AI Personal Portfolio Generator</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+
+<header class="main-header">
+    <div class="container">
+        <div class="header-content">
+            <div>
+                <span class="header-badge">
+                    <i class="bi bi-stars"></i> AI Powered
+                </span>
+                <h1>Personal Portfolio Generator</h1>
+                <p>Create your professional portfolio website in minutes.</p>
+            </div>
+
+            <button id="themeToggle" class="theme-toggle" type="button" title="Toggle dark mode">
+                <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="container py-5">
+
+    <div class="page-intro">
+        <h2>Build Your Portfolio</h2>
+        <p>Enter your information, skills and projects to generate a modern personal portfolio.</p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-5">
+
+            <div class="form-card">
+
+                <form id="portfolioForm">
+
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <i class="bi bi-person-circle"></i>
+                            <h3>Personal Information</h3>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name *</label>
+                            <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="professionalTitle" class="form-label">Professional Title</label>
+                            <input type="text" id="professionalTitle" class="form-control" placeholder="e.g. Web Developer">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="profilePhoto" class="form-label">Profile Photo</label>
+                            <input type="file" id="profilePhoto" class="form-control" accept="image/*">
+                            <small class="form-text">Choose an image from your device.</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" id="phone" class="form-control" placeholder="+91 98765 43210">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" id="location" class="form-control" placeholder="Pune, Maharashtra, India">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="linkedin" class="form-label">LinkedIn</label>
+                            <input type="url" id="linkedin" class="form-control" placeholder="https://linkedin.com/in/username">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="github" class="form-label">GitHub</label>
+                            <input type="url" id="github" class="form-control" placeholder="https://github.com/username">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <i class="bi bi-person-lines-fill"></i>
+                            <h3>About Me</h3>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="aboutMe" class="form-label">About Me</label>
+                            <textarea id="aboutMe" class="form-control" rows="5" placeholder="Write something about yourself or leave it empty for AI-generated content..."></textarea>
+                        </div>
+
+                        <button type="button" id="generateAboutBtn" class="btn btn-ai w-100">
+                            <i class="bi bi-stars"></i> Generate About Me with AI
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <h3>Education</h3>
+                        </div>
+
+                        <div id="educationContainer">
+
+                            <div class="dynamic-item education-item">
+
+                                <button type="button" class="remove-item d-none" title="Remove">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Degree / Course</label>
+                                    <input type="text" class="form-control education-degree" placeholder="B.E. Computer Engineering">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Institution</label>
+                                    <input type="text" class="form-control education-institution" placeholder="ABC College of Engineering">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Year</label>
+                                        <input type="text" class="form-control education-year" placeholder="2026">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Grade / CGPA</label>
+                                        <input type="text" class="form-control education-grade" placeholder="8.2 CGPA">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <button type="button" id="addEducationBtn" class="btn btn-outline-primary add-btn">
+                            <i class="bi bi-plus-circle"></i> Add Education
+                        </button>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                            <h3>Skills</h3>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="skills" class="form-label">Skills</label>
+                            <textarea id="skills" class="form-control" rows="4" placeholder="HTML, CSS, JavaScript, Bootstrap, Python, WordPress"></textarea>
+                            <small class="form-text">Separate skills using commas.</small>
+                        </div>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+                            <i class="bi bi-code-square"></i>
+                            <h3>Projects</h3>
+                        </div>
+
+                        <div id="projectsContainer">
+
+                            <div class="dynamic-item project-item">
+
+                                <button type="button" class="remove-item d-none" title="Remove">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Project Name</label>
+                                    <input type="text" class="form-control project-name" placeholder="AI Study Assistant">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Project Description</label>
+                                    <textarea class="form-control project-description" rows="3" placeholder="Describe your project or leave empty for AI-generated description..."></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Technologies</label>
+                                    <input type="text" class="form-control project-technologies" placeholder="HTML, CSS, JavaScript">
+                                </div>
+
+                                <button type="button" class="btn btn-small-ai generate-project-btn">
+                                    <i class="bi bi-stars"></i> AI Description
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button type="button" id="addProjectBtn" class="btn btn-outline-primary add-btn">
+                            <i class="bi bi-plus-circle"></i> Add Project
+                        </button>
+
+                    </div>
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+                            <i class="bi bi-chat-dots-fill"></i>
+                            <h3>Contact</h3>
+                        </div>
+
+                        <div class="contact-note">
+                            <i class="bi bi-info-circle"></i>
+                            Your contact details will be displayed in the portfolio contact section.
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="submit" id="generatePortfolioBtn" class="btn btn-generate">
+                            <i class="bi bi-magic"></i>
+                            Generate Portfolio
+                        </button>
+
+                        <button type="button" id="clearFormBtn" class="btn btn-clear">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Clear
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-7">
+
+            <div class="preview-card">
+
+                <div class="preview-header">
+                    <div>
+                        <span class="preview-label">
+                            <i class="bi bi-display"></i> Live Preview
+                        </span>
+                        <h2>Your Portfolio</h2>
+                    </div>
+
+                    <button type="button" id="openPortfolioBtn" class="btn btn-preview-action" disabled>
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        Open Full Preview
+                    </button>
+                </div>
+
+                <div id="portfolioEmpty" class="empty-preview">
+                    <div class="empty-icon">
+                        <i class="bi bi-window-stack"></i>
+                    </div>
+
+                    <h3>Your portfolio will appear here</h3>
+                    <p>Enter your information and click <strong>Generate Portfolio</strong>.</p>
+                </div>
+
+                <div id="portfolioDocument" class="portfolio-document d-none">
+
+                    <section class="portfolio-hero">
+
+                        <div class="portfolio-hero-content">
+
+                            <div class="profile-photo-wrapper">
+                                <img id="portfolioPhoto" src="" alt="Profile Photo">
+                                <div id="defaultProfileIcon" class="default-profile-icon">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                            </div>
+
+                            <div class="hero-text">
+                                <p class="hero-greeting">HELLO, I'M</p>
+                                <h1 id="portfolioName">Your Name</h1>
+                                <h2 id="portfolioTitle">Web Developer</h2>
+                                <p id="portfolioAboutHero">Welcome to my personal portfolio.</p>
+
+                                <div class="hero-buttons">
+                                    <a href="#portfolioProjects" class="hero-btn primary">
+                                        <i class="bi bi-code-slash"></i> My Projects
+                                    </a>
+
+                                    <a href="#portfolioContact" class="hero-btn secondary">
+                                        <i class="bi bi-envelope"></i> Contact Me
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section id="portfolioAboutSection" class="portfolio-section">
+                        <div class="portfolio-section-title">
+                            <span>01</span>
+                            <h2>About Me</h2>
+                        </div>
+
+                        <p id="portfolioAbout" class="portfolio-about-text"></p>
+                    </section>
+
+                    <section id="portfolioEducationSection" class="portfolio-section">
+                        <div class="portfolio-section-title">
+                            <span>02</span>
+                            <h2>Education</h2>
+                        </div>
+
+                        <div id="portfolioEducation"></div>
+                    </section>
+
+                    <section id="portfolioSkillsSection" class="portfolio-section">
+                        <div class="portfolio-section-title">
+                            <span>03</span>
+                            <h2>Skills</h2>
+                        </div>
+
+                        <div id="portfolioSkills" class="portfolio-skills"></div>
+                    </section>
+
+                    <section id="portfolioProjects" class="portfolio-section">
+                        <div class="portfolio-section-title">
+                            <span>04</span>
+                            <h2>Projects</h2>
+                        </div>
+
+                        <div id="portfolioProjectsContainer" class="portfolio-projects"></div>
+                    </section>
+
+                    <section id="portfolioContact" class="portfolio-contact-section">
+                        <div class="portfolio-section-title">
+                            <span>05</span>
+                            <h2>Let's Connect</h2>
+                        </div>
+
+                        <p>Interested in working together or discussing a project?</p>
+
+                        <div class="contact-grid">
+
+                            <a id="portfolioEmail" href="#" class="contact-card">
+                                <i class="bi bi-envelope-fill"></i>
+                                <span>Email</span>
+                                <strong>Email Me</strong>
+                            </a>
+
+                            <a id="portfolioPhone" href="#" class="contact-card">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span>Phone</span>
+                                <strong>Call Me</strong>
+                            </a>
+
+                            <a id="portfolioLinkedin" href="#" target="_blank" rel="noopener" class="contact-card">
+                                <i class="bi bi-linkedin"></i>
+                                <span>LinkedIn</span>
+                                <strong>Connect</strong>
+                            </a>
+
+                            <a id="portfolioGithub" href="#" target="_blank" rel="noopener" class="contact-card">
+                                <i class="bi bi-github"></i>
+                                <span>GitHub</span>
+                                <strong>View Profile</strong>
+                            </a>
+
+                        </div>
+                    </section>
+
+                    <footer class="portfolio-footer">
+                        <p>Designed with <i class="bi bi-heart-fill"></i> using AI Personal Portfolio Generator By Samruddhi Ikhar</p>
+                    </footer>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <p>AI Personal Portfolio Generator &copy; 2026 By Samruddhi Ikhar</p>
+    </div>
+</footer>
+
+<div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="loading-box">
+        <div class="spinner-border" role="status"></div>
+        <h3>Generating Portfolio...</h3>
+        <p>AI is preparing your professional portfolio.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
